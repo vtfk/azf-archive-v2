@@ -23,8 +23,7 @@ module.exports = async (context, req) => {
     return { status: 400, body: httpError(msg) }
   }
 
-  const { archive, service, method, system, template, parameter, demoRun, getExample } = req.body
-
+  const { archive, service, method, system, template, parameter, demoRun, getExample, options } = req.body
   if (!parameter) {
     const msg = 'Missing required parameter "parameter"'
     logger('error', msg)
@@ -51,6 +50,14 @@ module.exports = async (context, req) => {
     logger('error', msg)
     return { status: 400, body: httpError(msg) }
   }
+  // Validate that options is valid json if exists
+  try {
+    if (options) JSON.parse(JSON.stringify(parameter))
+  } catch (error) {
+    const msg = 'Parameter "options" must be valid json!'
+    logger('error', msg)
+    return { status: 400, body: httpError(msg) }
+  }
 
   // Validate that archive is a valid archive
   let archiveConfig = ARCHIVES.find(a => a.name.toLowerCase() === archive?.toLowerCase())
@@ -74,7 +81,7 @@ module.exports = async (context, req) => {
   // Raw call
   if (service && method) {
     try {
-      const result = await callArchive({ archiveConfig, service, method, parameter })
+      const result = await callArchive({ archiveConfig, service, method, parameter, options })
       return result // callArchive handles http result
     } catch (error) {
       logger('error', ['Raw archive call failed', error.toString(), error])
