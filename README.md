@@ -16,7 +16,6 @@ Required fields:
 - `parameter`: Parameters for calling ***P360***
 
 Optional fields:
-- `archive`: If you need another than what is set to default in environment variables
 - `demoRun`: If set to true, does not archive, but instead returns the generated payload for the template
 - `getExample`: If set to true, does not archive, returns a sample payload with the required parameters for the template
 - `parameter.attachments`: List of ***attachments*** to add to P360 Document when using templates with methods 'CreateDocument' or 'UpdateDocument' **NOTE** If the documents does not have any files - the first attachment in this list will become `Hoveddokument` for the document!
@@ -60,7 +59,6 @@ Useful for when you do not have sufficient data for automatic archiving (e.g. fo
 {
   "demoRun": true, // Optional
   "getExample": true, // Optional
-  "archive": "VTFK", // Optional. Must correspond to a archive-name in ARCHIVES-CONFIG (see ./config.js)
   "system": "iop",
   "template": "document",
   "parameter": {
@@ -126,13 +124,10 @@ Required fields:
 - `method`: Which ***method*** from ***SIF service*** to use
 - `parameter`: Parameters for calling ***service.method***
 
-Optional fields:
-- `archive`: If you need another than what is set to default in environment variables
 
 Example
 ```json
 {
-  "archive": "VTFK", // Optional. Must correspond to a archive-name in ARCHIVES-CONFIG (see ./config.js)
   "service": "CaseService",
   "method": "GetCases",
   "parameter": {
@@ -148,7 +143,6 @@ All services have a Ping-method. Ping only returns status-code and no body.
 Example
 ```json
 {
-  "archive": "VTFK", // Optional
   "service": "CaseService",
   "method": "Ping",
   "parameter": {}
