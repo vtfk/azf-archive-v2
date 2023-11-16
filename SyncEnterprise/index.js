@@ -51,7 +51,7 @@ module.exports = async (context, req) => {
     logger('info', [`Got brregdata for orgnr: ${orgnr}, repacking result`], context)
     const repackedEnterprise = repackBrreg(brregEnterprise)
     logger('info', [`Syncing enterprise orgnr: ${orgnr} in archive`], context)
-    const enterprise = await syncEnterprise(repackedEnterprise)
+    const enterprise = await syncEnterprise(repackedEnterprise, context)
     logger('info', [`Successfully synced enterprise orgnr: ${orgnr} in archive`], context)
     return httpResponse(200, { repackedEnterprise, enterprise })
   } catch (error) {

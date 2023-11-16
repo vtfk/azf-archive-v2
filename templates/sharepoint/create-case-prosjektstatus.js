@@ -11,8 +11,8 @@ module.exports = {
         Status: 'R',
         FiledOnPaper: false,
         ResponsiblePersonEmail: archiveData.responsiblePersonEmail,
-        AccessGroup: archiveData.accessGroup,
-        Paragraph: archiveData.paragraph,
+        AccessGroup: archiveData.accessGroup || 'Alle',
+        Paragraph: archiveData.paragraph || '',
         ExternalID: {
           Id: archiveData.caseExternalId,
           Type: 'SharePoint Case'
@@ -24,8 +24,10 @@ module.exports = {
     caseTitle: 'Hei',
     projectNumber: '23-2',
     responsiblePersonEmail: 'jallaballa@vtfk.no',
-    accessGroup: 'Alle',
-    paragraph: '13',
     caseExternalId: '{siteUrl}-{sakstype (f. eks prosjektstatus)}-{sharepoint-site-guid}'
+  },
+  optionalFields: {
+    accessGroup: 'Alle',
+    paragraph: '13'
   }
 }
