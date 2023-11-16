@@ -2,7 +2,7 @@ const { logConfig, logger } = require('@vtfk/logger')
 const { ARCHIVE_ROLE } = require('../config')
 const { httpResponse } = require('../lib/http-response')
 const { decodeAccessToken } = require('../lib/decode-access-token')
-const { syncPrivatePerson, getSyncPrivatePersonMethod } = require('../lib/archive/sync-private-person')
+const { syncPrivatePerson, getSyncPrivatePersonMethod, getName } = require('../lib/archive/sync-private-person')
 const { syncElevmappe } = require('../lib/archive/sync-elevmappe')
 
 module.exports = async (context, req) => {
@@ -36,15 +36,29 @@ module.exports = async (context, req) => {
     return httpResponse(400, msg)
   }
 
-  // req-body stuff: const { ssn, name, birthdate, fakeSsn, gender, streetAddress, zipCode, zipPlace, forceUpdate, manualData } = req.body
-
-  // Check if name or firstName and lastName
+  // Below, we see valid input properties in body
+  const { ssn, name, firstName, lastName, birthdate, fakeSsn, gender, streetAddress, zipCode, zipPlace, forceUpdate, manualData } = req.body
+  const nameObj = getName(name, firstName, lastName) // Name can be either "name" or "firstName and lastName", so we make sure it we have them all further on
+  const syncPrivatePersonData = {
+    ssn,
+    name: nameObj.fullName,
+    firstName: nameObj.firstName,
+    lastName: nameObj.lastName,
+    birthdate,
+    fakeSsn,
+    gender,
+    streetAddress,
+    zipCode,
+    zipPlace,
+    forceUpdate,
+    manualData
+  }
 
   let privatePerson
   try {
     logger('info', ['Syncing PrivatePerson'], context)
-    getSyncPrivatePersonMethod(req.body) // Throws error if we do not have a valid combination of parameters
-    privatePerson = await syncPrivatePerson(req.body, context)
+    getSyncPrivatePersonMethod(syncPrivatePersonData) // Throws error if we do not have a valid combination of parameters
+    privatePerson = await syncPrivatePerson(syncPrivatePersonData, context)
     logger('info', ['Succesfully synced PrivatePerson'], context)
   } catch (error) {
     logger('error', ['error when syncing privatePerson', error.response?.data || error.stack || error.toString()], context)
