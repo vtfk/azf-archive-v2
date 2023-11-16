@@ -1,3 +1,5 @@
+const { ARCHIVE_ROBOT } = require('../../config')
+
 module.exports = {
   archiveTemplate: (archiveData) => {
     return {
@@ -9,7 +11,7 @@ module.exports = {
         UnofficialTitle: `Elevmappe - ${archiveData.firstName} ${archiveData.lastName}`,
         Status: 'B',
         JournalUnit: 'Sentralarkiv',
-        SubArchive: '4',
+        SubArchive: 'Elev',
         ArchiveCodes: [
           {
             ArchiveCode: archiveData.ssn,
@@ -20,20 +22,18 @@ module.exports = {
           {
             ArchiveCode: 'B31',
             ArchiveType: 'FAGKLASSE PRINSIPP',
-            Sort: 2,
-            IsManualText: true
+            Sort: 2
           }
         ],
-        FiledOnPaper: false,
         AccessCode: '13',
         Paragraph: 'Offl. § 13 jf. fvl. § 13 (1) nr.1',
-        AccessGroup: 'VTFK Robot',
-        ResponsibleEnterpriseRecno: 506,
-        ResponsiblePersonRecno: archiveData.robotRecno,
+        AccessGroup: ARCHIVE_ROBOT.accessGroup,
+        ResponsibleEnterpriseRecno: ARCHIVE_ROBOT.departmentRecno,
+        ResponsiblePersonRecno: ARCHIVE_ROBOT.recno,
         Contacts: [
           {
             Role: 'Sakspart',
-            ReferenceNumber: archiveData.ssn,
+            ReferenceNumber: `recno:${archiveData.recno}`,
             IsUnofficial: true
           }
         ]
@@ -44,6 +44,6 @@ module.exports = {
     firstName: 'Ola',
     lastName: 'Nordmann',
     ssn: '01010101010',
-    robotRecno: '200326'
+    recno: 12345
   }
 }

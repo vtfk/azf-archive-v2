@@ -1,4 +1,4 @@
-const { repackFregAddress } = require("../lib/archive/syncPrivatePerson")
+const { repackFregAddress } = require("../lib/archive/sync-private-person")
 
 const fregNoWorries = {
   "adressebeskyttelse": [], // Returns array - check if it includes "fortrolig" or "strengtFortrolig"

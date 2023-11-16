@@ -3,7 +3,12 @@ module.exports = {
   ARCHIVE: {
     url: process.env.ARCHIVE_URL || 'arkivarkivarkiv.vtfk.no',
     authkey: process.env.ARCHIVE_AUTHKEY || 'bluddiduddisusdii',
-    clientId: process.env.ARCHIVE_CLIENT_ID || 'jujujuju'
+    clientId: process.env.ARCHIVE_CLIENT_ID || 'jujujuju',
+  },
+  ARCHIVE_ROBOT: {
+    recno: process.env.ARCHIVE_ROBOT_RECNO || '12345',
+    accessGroup: process.env.ARCHIVE_ROBOT_ACCESS_GROUP || 'VFK Robot',
+    departmentRecno: process.env.ARCHIVE_ROBOT_DEPARTMENT || '200006'
   },
   ALLOW_LEGACY_RENEGOTIATION: (process.env.ALLOW_LEGACY_RENEGOTIATION && process.env.ALLOW_LEGACY_RENEGOTIATION === 'true') || false, // If you cant use tls1.2
   BRREG: {
@@ -41,5 +46,6 @@ module.exports = {
     scope: process.env.FREG_SCOPE || 'fregscupet'
   },
   ACCESSGROUP_EXCEPTIONS: (process.env.ACCESSGROUP_EXCEPTIONS && JSON.parse(process.env.ACCESSGROUP_EXCEPTIONS)) || {},
-  GENERATED_PDF_PROPERTY_NAME: process.env.GENERATED_PDF_PROPERTY_NAME || 'templatePdfBase64'
+  GENERATED_PDF_PROPERTY_NAME: process.env.GENERATED_PDF_PROPERTY_NAME || 'templatePdfBase64',
+  COUNTY_NUMBER: process.env.COUNTY_NUMBER || '38'
 }

@@ -3,11 +3,10 @@ const { ARCHIVE_ROLE } = require('../config')
 const { httpResponse } = require('../lib/http-response')
 const { decodeAccessToken } = require('../lib/decode-access-token')
 const { syncPrivatePerson, getSyncPrivatePersonMethod } = require('../lib/archive/sync-private-person')
-const { syncElevmappe } = require('../lib/archive/sync-elevmappe')
 
 module.exports = async (context, req) => {
   logConfig({
-    prefix: 'SyncElevmappe'
+    prefix: 'SyncPrivatePerson'
   })
   // Verify token
   const decoded = decodeAccessToken(req.headers.authorization)
@@ -24,7 +23,7 @@ module.exports = async (context, req) => {
   }
 
   logConfig({
-    prefix: `SyncElevmappe - clientId ${decoded.appid}${decoded.upn ? ' - ' + decoded.upn : ''}`
+    prefix: `SyncPrivatePerson - clientId ${decoded.appid}${decoded.upn ? ' - ' + decoded.upn : ''}`
   })
 
   logger('info', ['Role validated'], context)
@@ -46,18 +45,9 @@ module.exports = async (context, req) => {
     getSyncPrivatePersonMethod(req.body) // Throws error if we do not have a valid combination of parameters
     privatePerson = await syncPrivatePerson(req.body, context)
     logger('info', ['Succesfully synced PrivatePerson'], context)
+    return httpResponse(200, { privatePerson })
   } catch (error) {
     logger('error', ['error when syncing privatePerson', error.response?.data || error.stack || error.toString()], context)
-    return httpResponse(500, error)
-  }
-
-  try {
-    logger('info', ['Syncing elevmappe'], context)
-    const elevmappe = await syncElevmappe(privatePerson, context)
-    logger('info', ['Succesfully synced elevmappe'], context)
-    return httpResponse(200, { privatePerson, elevmappe })
-  } catch (error) {
-    logger('error', ['error when syncing elevmappe', error.response?.data || error.stack || error.toString()], context)
     return httpResponse(500, error)
   }
 }

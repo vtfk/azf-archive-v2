@@ -10,7 +10,7 @@ module.exports = {
         Contacts: [
           {
             Role: 'Sakspart',
-            ReferenceNumber: archiveData.ssn,
+            ReferenceNumber: `recno:${archiveData.recno}`,
             IsUnofficial: true
           }
         ],
@@ -22,6 +22,6 @@ module.exports = {
     caseNumber: '30/00000',
     firstName: 'Per',
     lastName: 'Son',
-    ssn: '01010101010'
+    recno: 12345
   }
 }

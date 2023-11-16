@@ -4,7 +4,6 @@ const callArchiveTemplate = require('../lib/call-archive-template')
 const { ARCHIVE_ROLE } = require('../config')
 const { httpResponse } = require('../lib/http-response')
 const { decodeAccessToken } = require('../lib/decode-access-token')
-const HTTPError = require('../lib/http-error')
 
 module.exports = async (context, req) => {
   logConfig({

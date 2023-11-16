@@ -11,6 +11,6 @@ module.exports = {
     }
   },
   requiredFields: {
-    ssn: '01010101010'
+    ssn: '12345678910'
   }
 }

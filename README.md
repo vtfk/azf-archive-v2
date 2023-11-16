@@ -151,7 +151,6 @@ Example
 Returns 200 OK (if ok 🙃)
 
 
-
 #### Supported **services** and their **methods**
 
 - **AccessGroupService**
@@ -200,11 +199,9 @@ Full documentation for the **SIF services** can be found [here](https://github.c
 Latest **SIF documentation** as well as **release notes** can be found [here](https://help.360online.com/Release_information/Index.html#!Documents/additionalinformationandresources.htm)
 
 ### ```POST /SyncPrivatePerson```
-- Create **PrivatePerson** on person if one doesn't exist
-- Updates name and address on **PrivatePerson** if one already exists
-- Updates ssn for **PrivatePerson** if parameter *oldSsn* is passed, or if new ssn is found in `Det sentrale folkeregister`
+- Creates **PrivatePerson** on person if one doesn't exist on given identifier, returns the PrivatePerson if it exists, or returns it after creation if it does not exist.
 
-Fetches person info from [Det sentrale folkeregister](https://github.com/vtfk/azf-dsf)
+If needed, fetches person info from [Folkeregisteret](https://github.com/vtfk/azf-freg)
 
 #### `With ssn as parameter`
 ```json
@@ -216,33 +213,109 @@ Fetches person info from [Det sentrale folkeregister](https://github.com/vtfk/az
 #### `With birthdate and name as parameter (only works with one match)`
 ```json
 {
-  "birthdate": "010101",
+  "birthdate": "2021-02-27", // YYYY-MM-DD
+  "name": "Per Son", // Either name, or firstName and lastName
   "firstName": "Per",
   "lastName": "Son"
 }
 ```
 
-#### `Optional: With old ssn and new ssn as parameter (for updating ssn on PrivatePerson)`
-Either updates the **PrivatePerson** with new ssn, if person exists on old ssn, or creates new **PrivatePerson** with new ssn
+#### `With fakeSsn as parameter`
+Either returns the **PrivatePerson** with the provided data if person exists on the fake ssn AND the lastname of the existing 360-contact and the input-lastname matches, or creates new **PrivatePerson** with the provided data. The fake ssn is generated automatically based on the birthdate and gender. Address info is also required when using fake ssn.
+
 ```json
 {
-  "ssn": "01010101011",
-  "oldSsn": "01010101010"
+  "birthdate": "2021-02-27", // YYYY-MM-DD
+  "gender": "f", // "m" or "f"
+  "name": "Per Son", // Either name, or firstName and lastName
+  "firstName": "Per",
+  "lastName": "Son",
+  "streetAddress": "Gamlehjemmet 44",
+  "zipCode": "1234",
+  "zipPlace": "Jupiter"
 }
 ```
-
-#### `Optional: Do not lookup person in DSF (det sentrale folkeregister). (Requires more info) Useful when person is not registered in DSF`
-Either updates the **PrivatePerson** with the provided data if person exists on ssn, or creates new **PrivatePerson** with the provided data
+#### `Optional: Use manually provided data instead of FREG data)`
+Either updates the **PrivatePerson** with FREG data if person exists on identifier, or creates new **PrivatePerson** with the provided data
 ```json
 {
   "ssn": "12345678910",
-  "firstName": "Bjarte",
-  "lastName": "Bjøstheim",
+  "name": "Per Son", // Either name, or firstName and lastName
+  "firstName": "Per",
+  "lastName": "Son",
   "streetAddress": "Gamlehjemmet 44",
   "zipCode": "1234",
   "zipPlace": "Jupiter",
-  "addressCode": 0,
-  "skipDSF": true // Must be set to "true" if you need to skip DSF lookup
+  "manualData": true
+}
+```
+```json
+{
+  "birthdate": "2021-02-27", // YYYY-MM-DD
+  "name": "Per Son", // Either name, or firstName and lastName
+  "firstName": "Per",
+  "lastName": "Son",
+  "streetAddress": "Gamlehjemmet 44",
+  "zipCode": "1234",
+  "zipPlace": "Jupiter",
+  "manualData": true
+}
+```
+
+#### `Optional: Force update of PrivatePerson even if it alreday exists (if you want to make sure it is updated with latest or provided data)`
+Either updates the **PrivatePerson** with FREG data if person exists on identifier, or creates new **PrivatePerson** with the provided data
+```json
+{
+  "ssn": "12345678910",
+  "forceUpdate": true
+}
+```
+```json
+{
+  "birthdate": "2021-02-27", // YYYY-MM-DD
+  "name": "Per Son", // Either name, or firstName and lastName
+  "firstName": "Per",
+  "lastName": "Son",
+  "forceUpdate": true
+}
+```
+```json
+{
+  "birthdate": "2021-02-27", // YYYY-MM-DD
+  "gender": "f", // "m" or "f"
+  "name": "Per Son", // Either name, or firstName and lastName
+  "firstName": "Per",
+  "lastName": "Son",
+  "streetAddress": "Gamlehjemmet 44",
+  "zipCode": "1234",
+  "zipPlace": "Jupiter",
+  "forceUpdate": true
+}
+```
+```json
+{
+  "ssn": "12345678910",
+  "name": "Per Son", // Either name, or firstName and lastName
+  "firstName": "Per",
+  "lastName": "Son",
+  "streetAddress": "Gamlehjemmet 44",
+  "zipCode": "1234",
+  "zipPlace": "Jupiter",
+  "forceUpdate": true,
+  "manualData": true
+}
+```
+```json
+{
+  "birthdate": "2021-02-27", // YYYY-MM-DD
+  "name": "Per Son", // Either name, or firstName and lastName
+  "firstName": "Per",
+  "lastName": "Son",
+  "streetAddress": "Gamlehjemmet 44",
+  "zipCode": "1234",
+  "zipPlace": "Jupiter",
+  "forceUpdate": true,
+  "manualData": true
 }
 ```
 
@@ -261,7 +334,7 @@ Fetches company info from [Brønnøysundregisteret]https://www.brreg.no/)
 
 
 ### ```POST /SyncElevmappe```
-- Creates **PrivatePerson** on person if one doesn't exist
+- Creates **PrivatePerson** on person if one doesn't exist on the given identifier
 - Updates name and address on **PrivatePerson** if one already exists
 - Updates ssn for **PrivatePerson** if parameter *oldSsn* is passed, or if new ssn is found in `Det sentrale folkeregister`
 - Creates **Elevmappe** on user if one doesn't exist
