@@ -3,7 +3,7 @@ module.exports = {
   ARCHIVE: {
     url: process.env.ARCHIVE_URL || 'arkivarkivarkiv.vtfk.no',
     authkey: process.env.ARCHIVE_AUTHKEY || 'bluddiduddisusdii',
-    clientId: process.env.ARCHIVE_CLIENT_ID || 'jujujuju',
+    clientId: process.env.ARCHIVE_CLIENT_ID || 'jujujuju'
   },
   ARCHIVE_ROBOT: {
     recno: process.env.ARCHIVE_ROBOT_RECNO || '12345',

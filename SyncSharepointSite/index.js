@@ -3,6 +3,7 @@ const { ARCHIVE_ROLE } = require('../config')
 const { httpResponse } = require('../lib/http-response')
 const { decodeAccessToken } = require('../lib/decode-access-token')
 const syncSharePointSite = require('../lib/archive/sync-sharepoint-site')
+const HTTPError = require('../lib/http-error')
 
 const validateInput = (body) => {
   const { siteUrl, projectTitle, responsiblePersonEmail, caseExternalId, caseTitle } = body
@@ -74,7 +75,7 @@ module.exports = async (context, req) => {
   try {
     validateInput(req.body)
   } catch (error) {
-    return httpResponse(500, msg)
+    return httpResponse(500, error)
   }
   const input = {
     siteUrl, projectTitle, responsiblePersonEmail, projectNumber, caseExternalId, caseTitle, accessGroup, paragraph, caseType

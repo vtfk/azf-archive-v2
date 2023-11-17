@@ -1,7 +1,6 @@
 const { readdirSync, lstatSync } = require('fs')
 const flattenObject = require('../lib/flatten-object')
 const { GENERATED_PDF_PROPERTY_NAME } = require('../config')
-const exp = require('constants')
 
 const systems = readdirSync('./templates').filter(ele => lstatSync(`./templates/${ele}`).isDirectory()) // outside the test working dir is root foler
 

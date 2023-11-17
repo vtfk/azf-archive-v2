@@ -53,7 +53,6 @@ module.exports = async (context, req) => {
     manualData
   }
 
-
   let privatePerson
   try {
     logger('info', ['Syncing PrivatePerson'], context)
