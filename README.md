@@ -178,7 +178,7 @@ If needed, fetches person info from [Folkeregisteret](https://github.com/vtfk/az
 ```
 
 #### `With fakeSsn as parameter`
-Either uses the **PrivatePerson** with the provided data if person exists on the fake ssn AND the lastname of the existing 360-contact and the input-lastname matches, or creates new **PrivatePerson** with the provided data. The fake ssn is generated automatically based on the birthdate and gender. Address info is also required when using fake ssn.
+Either uses the **PrivatePerson** with the provided data if person exists on the fake ssn AND the lastname of the existing 360-contact and the input-lastname matches, or creates new **PrivatePerson** with the provided data. The fake ssn is generated automatically based on the birthdate and gender. Address info is also required when using fake ssn. Fake ssn is generated in the following format: {birthdate (on the format {DD+40}MMYY)}{serial number}{gender (m = 1, f = 2)}{countyNumber}. E.g the example below will result in 67022199238 (if countyNumber is 38)
 
 ```json
 {
@@ -314,7 +314,7 @@ If needed, fetches person info from [Folkeregisteret](https://github.com/vtfk/az
 ```
 
 #### `With fakeSsn as parameter`
-Either uses the **PrivatePerson** with the provided data if person exists on the fake ssn AND the lastname of the existing 360-contact and the input-lastname matches, or creates new **PrivatePerson** with the provided data. The fake ssn is generated automatically based on the birthdate and gender. Address info is also required when using fake ssn.
+Either uses the **PrivatePerson** with the provided data if person exists on the fake ssn AND the lastname of the existing 360-contact and the input-lastname matches, or creates new **PrivatePerson** with the provided data. The fake ssn is generated automatically based on the birthdate and gender. Address info is also required when using fake ssn. Fake ssn is generated in the following format: {birthdate (on the format {DD+40}MMYY)}{serial number}{gender (m = 1, f = 2)}{countyNumber}. E.g the example below will result in 67022199238 (if countyNumber is 38)
 
 ```json
 {
