@@ -16,7 +16,8 @@ module.exports = {
     branchUrl: process.env.BRREG_BRANCH_URL || 'https://data.brreg.no/enhetsregisteret/api/underenheter/'
   },
   PDF_GENERATOR: {
-    url: process.env.PDF_GENERATOR
+    url: process.env.PDF_GENERATOR_URL,
+    key: process.env.PDF_GENERATOR_KEY
   },
   MAIL: {
     cc: (process.env.MAIL_CC && process.env.MAIL_CC.split(',')) || false,
