@@ -35,8 +35,8 @@
   "homepage": "https://github.com/vtfk/azf-archive#readme",
   "dependencies": {
     "@azure/msal-node": "^1.16.0",
-    "@vtfk/logger": "^5.0.2",
-    "axios": "^1.3.4",
+    "@vtfk/logger": "^6.0.1",
+    "axios": "^1.6.2",
     "jsonwebtoken": "^9.0.0",
     "node-cache": "^5.1.2",
     "vtfk-schools-info": "^3.2.0"
