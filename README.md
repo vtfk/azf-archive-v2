@@ -412,110 +412,6 @@ Either updates the **PrivatePerson** with FREG data if person exists on identifi
 }
 ```
 
-### ```POST /SyncEmployee```
-- Creates **PrivatePerson** on person if one doesn't exist
-- Updates name and address on **PrivatePerson** if one already exists
-- Creates **Employee project** on user if one doesn't exist
-- Sends email alert to archive department if there is need for manual operations:
-  - If manager does not have user in P360
-  - If manager have several contactpersons on email-address
-  - If enterprise manager is employed in is missing enterprisenumber
-  - If several enterprises are found on the same enterprisenumber
-  - If enterprise does not have access group of type "Lønn" or "Personal"
-  - If several employee projects are found on one employee
-
-Fetches person info from [Det sentrale folkeregister](https://github.com/vtfk/azf-dsf)
-
-#### `With ssn and upn as parameter`
-```json
-{
-  "ssn": "01010101010",
-  "upn": "per.son@company.no"
-}
-```
-
-#### `With birthdate and name as parameter (only works with one match)`
-```json
-{
-  "birthdate": "010101",
-  "firstName": "Per",
-  "lastName": "Son",
-  "upn": "per.son@company.no"
-}
-```
-
-#### `Optional: Do not lookup person in DSF (det sentrale folkeregister). (Requires more info) Useful when person is not registered in DSF`
-Either updates the **PrivatePerson** with the provided data if person exists on ssn, or creates new **PrivatePerson** with the provided data. Updates or creates **elevmappe** as well.
-```json
-{
-  "ssn": "12345678910",
-  "firstName": "Bjarte",
-  "lastName": "Bjøstheim",
-  "streetAddress": "Gamlehjemmet 44",
-  "zipCode": "1234",
-  "zipPlace": "Jupiter",
-  "addressCode": 0,
-  "skipDSF": true, // Must be set to "true" if you need to skip DSF lookup
-  "upn": "bjarte.bjostheim@company.no
-}
-```
-
-#### `Optional: With parameter allowNullValues`
-Set **allowNullValues** to **true**, if you want to continue also when accessGroups and enterprise is not found. **REMARK:** Client itself must handle access groups, enterprise, and manager when this parameter is set to true
-```json
-{
-  "ssn": "01010101011",
-  "upn": "per.son@company.no",
-  "allowNullValues": false // Defaults to "true"
-}
-```
-#### `RETURNS`
-```json
-{
-	"dsfPerson": {
-		"ssn": "010101010101",
-		"oldSsn": "010101010101", // The same as ssn if no change in DSF, or not specified by client
-		"firstName": "Per",
-		"lastName": "Son",
-		"streetAddress": "Gata 2",
-		"zipCode": "1234",
-		"zipPlace": "STED",
-		"addressType": "VANLIG BOSATT",
-		"addressCode": 0,
-		"residentialAddress": {
-			"ADR": "Gata 2",
-			"POSTN": "1234",
-			"POSTS": "STED"
-		}
-	},
-	"privatePerson": {
-		"ssn": "010101010101",
-		"oldSsn": "010101010101",
-		"firstName": "Per",
-		"lastName": "Son",
-		"streetAddress": "Gata 2",
-		"zipCode": "1234",
-		"zipPlace": "STED",
-		"addressCode": 0,
-		"recno": 123456,
-		"updated": false, // If the privatePerson was updated
-		"updatedSsn": false // If the ssn of the privatePerson was updated
-	},
-	"employee": {
-    "upn": "per.son@company.no", // Employee userPrincipalName from azure ad
-		"manager": "herr.sjef@company.no", // Registered manager in azure ad
-		"enterpriseNumber": "123456", // NOTE: Can be null if allowNullValues is false
-		"enterpriseName": "Seksjon for surr og tull", // NOTE: Can be null if allowNullValues is false
-		"accessGroups": {
-			"personal": "Personal surr og tull", // NOTE: Can be null if allowNullValues is false
-			"lonn": "Lønn surr og tull" // NOTE: Can be null if allowNullValues is false
-		},
-		"recno": 12345, // Recno of employeeProject
-		"projectNumber": "23-12" // ProjectNumber of employeeProject 
-	}
-}
-```
-
 ### ```POST /SyncSharePointSite```
 Endpoint for connecting a Sharepoint site to a archive-project, and a list || documentLibrary || folder to a archive-case
 
@@ -553,58 +449,47 @@ The Sharepoint site is connected to a archive-projectNumber. The list || documen
 ```
 
 ## Templates
-[All templates](https://github.com/vtfk/azf-archive/blob/master/templates)
+All templates are found in [the templates folder](./templates/) 
 
-Currently available archive templates [All templates](https://github.com/vtfk/azf-archive/blob/master/templates)
-
-| System | Template | Languages | Description |
-|--------|----------|-----------|-------------|
-| elevmappe | create-elevmappe | nb | Create **Elevmappe** by referencing **social security number**.<br>[JSON template and data format available here](https://github.com/vtfk/azf-archive/blob/master/templates/elevmappe-create-elevmappe.json)
-| elevmappe | create-private-person | nb | Create **PrivatePerson** in *P360* contact register.<br>[JSON template and data format available here](https://github.com/vtfk/azf-archive/blob/master/templates/elevmappe-create-private-person.json)
-| elevmappe | get-documents | nb | Get **Documents** archived on a **caseNumber**.<br>[JSON template and data format available here](https://github.com/vtfk/azf-archive/blob/master/templates/elevmappe-get-documents.json)
-| elevmappe | get-elevmappe | nb | Get **Elevmappe** archived on a **social security number**.<br>[JSON template and data format available here](https://github.com/vtfk/azf-archive/blob/master/templates/elevmappe-get-elevmappe.json)
-| elevmappe | get-private-person | nb | Get **PrivatePerson** from *P360* contact register by referencing **social security number**.<br>[JSON template and data format available here](https://github.com/vtfk/azf-archive/blob/master/templates/elevmappe-get-private-person.json)
-| elevmappe | update-elevmappe | nb | Update **PrivatePerson** on **Elevmappe** archived on a **caseNumber**.<br>[JSON template and data format available here](https://github.com/vtfk/azf-archive/blob/master/templates/elevmappe-update-elevmappe.json)
-| elevmappe | update-private-person | nb | Update **PrivatePerson** in *P360* contact register.<br>[JSON template and data format available here](https://github.com/vtfk/azf-archive/blob/master/templates/elevmappe-update-private-person.json)
-| iop | hemmelig | nb | Sends a auto generate PDF to school to distribute this manully.<br>[JSON template and data format available here](https://github.com/vtfk/azf-archive/blob/master/templates/iop-hemmelig.json)
-| iop | document | nb | Archive an IOP on students elevmappe.<br>[JSON template and data format available here](https://github.com/vtfk/azf-archive/blob/master/templates/iop-document.json)
-| masseutsendelse | utsendelsesdokument | nb | Upload document(s)
 
 ## local.settings.json
 
 ```json
 {
-  "Values": {
-    "AzureWebJobsStorage": "",
-    "FUNCTIONS_WORKER_RUNTIME": "node",
-    "P360_BASE_URL": "http://p360server.domain.no:3001",
-    "P360_TOKEN": "bla-bla-bla-bla-123",
-    "P360_SECURE_BASE_URL": "http://p360sikkerserver.domain.no:3001",
-    "P360_SECURE_TOKEN": "bla-bla-bla-bla-123",
-    "P360_VTFK_ROBOT_RECNO": "000000",
-    "PAPERTRAIL_HOST": "https://logs.collector.solarwinds.com/v1/log",
-    "PAPERTRAIL_TOKEN": "token",
-    "NODE_ENV": "production",
-    "PDF_GENERATOR": "https://pdf.no/generate",
-    "DSF_JWT_SECRET": "Noe skikkelig hemmelig",
-    "DSF_URL": "https://dsf.no/lookup",
-    "DSF_SAKSREF": "systemref",
-    "DB_USER": "db-user",
-    "DB_PASSWORD": "db-pass",
-    "DB_SERVER": "db-server",
-    "DB_DATABASE": "db-db",
-    "DB_TABLE": "db-table",
-    "E18_URL": "https://e18url.net", // optional
-    "E18_KEY": "secret token", // optional
-    "E18_SYSTEM": "p360", // optional
-    "E18_EMPTY_JOB": true // optional
-  }
+    "IsEncrypted": false,
+    "Values": {
+      "AzureWebJobsStorage": "",
+      "FUNCTIONS_WORKER_RUNTIME": "node",
+      "ALLOW_LEGACY_RENEGOTIATION": false,
+      "ARCHIVE_ROLE": "Archive",
+      "ARCHIVE_URL": "sif rpc url",
+      "ARCHIVE_CLIENT_ID": "sif client id",
+      "ARCHIVE_AUTHKEY": "sif authkey",
+      "ARCHIVE_ROBOT_RECNO": "recno of robot in p360, used as responsible on elevmapper",
+      "ARCHIVE_ROBOT_ACCESS_GROUP": "robot access group, used on elevmapper",
+      "PDF_GENERATOR_URL": "url to pdf api",
+      "PDF_GENERATOR_KEY": "key for pdf api",
+      "MAIL_TO_ARCHIVE": "mail address to archive team",
+      "MAIL_TO_ARCHIVE_7011": "mail address to archive hr team",
+      "MAIL_TO_ARCHIVE_ADMINISTRATOR": "mail address to archive administrator",
+      "MAIL_SECRET": "key for mail api",
+      "MAIL_URL": "url to mail api",
+      "MAIL_MOBILE": "signature mobile number for emails",
+      "MAIL_PHONE": "signature phpne number for emails",
+      "MAIL_COMPANY": "signature company for emails",
+      "MAIL_TEMPLATE_NAME": "mail template",
+      "APPREG_CLIENT_ID": "client id of app reg representing this function",
+      "APPREG_CLIENT_SECRET": "client secret",
+      "APPREG_TENANT_ID": "tenant id",
+      "GRAPH_SCOPE": "https://graph.microsoft.com/.default",
+      "FREG_URL": "url to freg api",
+      "FREG_SCOPE": "scope for freg api",
+      "BRREG_URL": "url to brreg api",
+      "ACCESSGROUP_EXCEPTIONS": "spør en voksen",
+      "COUNTY_NUMBER": "fylkesnummer"
+    }
 }
 ```
-
-### E18
-
-To support [E18](https://github.com/vtfk/e18-node#usage), add `E18_URL`, `E18_KEY` and `E18_SYSTEM`
 
 ## Deploy
 
@@ -615,21 +500,9 @@ You'll need a valid subscription and to setup the following resources
 - resource group
 - app service plan
 - storage account
-
-#### Setup function
-
-The easiest way to make this function run is to setup an app service, configure the app and get the function from GitHub.
-
-- add function app
-  - Runtime stack -> Node
-
-Configuration for app (Application settings)
-- add values from [local.settings.json](#local.settings.json)
-
-- add function
-  - Plattform features -> deployment center
-  - github
-  - branch master
+- function app
+  - auth enabled with entra id
+- app registration
 
 # Development
 
