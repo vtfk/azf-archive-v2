@@ -182,6 +182,7 @@ Either uses the **PrivatePerson** with the provided data if person exists on the
 
 ```json
 {
+  "fakeSsn": true,
   "birthdate": "2021-02-27", // YYYY-MM-DD
   "gender": "f", // "m" or "f"
   "name": "Per Son", // Either name, or firstName and lastName
@@ -318,6 +319,7 @@ Either uses the **PrivatePerson** with the provided data if person exists on the
 
 ```json
 {
+  "fakeSsn": true,
   "birthdate": "2021-02-27", // YYYY-MM-DD
   "gender": "f", // "m" or "f"
   "name": "Per Son", // Either name, or firstName and lastName
