@@ -1,4 +1,4 @@
-module.exports = {  
+module.exports = {
   archiveTemplate: (archiveData) => {
     const currentYear = new Date().getFullYear()
     return {
