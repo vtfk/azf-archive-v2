@@ -1,5 +1,7 @@
 module.exports = {
   archiveTemplate: (archiveData) => {
+    const currentYear = new Date().getFullYear()
+    const nextYear = currentYear + 1
     return {
       service: 'DocumentService',
       method: 'CreateDocument',
@@ -24,20 +26,21 @@ module.exports = {
             Category: '1',
             Format: 'PDF',
             Status: 'F',
-            Title: 'Søkerens svar på skoleplass 2023/2024'
+            Title: `Søkerens svar på skoleplass ${currentYear}/${nextYear}`
           }
         ],
         Paragraph: 'Offl. § 13 jf. fvl. § 13 (1) nr.1',
         ResponsiblePersonRecno: '200326',
         ResponsibleEnterpriseRecno: '506',
         Status: 'J',
-        Title: 'Søkerens svar på skoleplass 2023/2024',
-        UnofficialTitle: 'Søkerens svar på skoleplass 2023/2024'
+        Title: `Søkerens svar på skoleplass ${currentYear}/${nextYear}`,
+        UnofficialTitle: `Søkerens svar på skoleplass $${currentYear}/${nextYear} - ${archiveData.studentName}`
       }
     }
   },
   requiredFields: {
     caseNumber: '30/00000',
+    studentName: 'Baba Yaga',
     ssn: '01010101010',
     documentDate: '2021-09-27',
     base64: 'heihei'

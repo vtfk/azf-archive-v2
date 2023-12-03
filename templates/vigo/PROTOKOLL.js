@@ -31,12 +31,13 @@ module.exports = {
         ResponsibleEnterpriseRecno: '200065',
         Status: 'J',
         Title: 'Protokoll',
-        UnofficialTitle: 'Protokoll'
+        UnofficialTitle: `Protokoll - ${archiveData.studentName}`
       }
     }
   },
   requiredFields: {
     caseNumber: '30/00000',
+    studentName: 'Huggu von Stuggu',
     ssn: '01010101010',
     documentDate: '2021-09-27',
     base64: 'heihei'

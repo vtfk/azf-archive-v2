@@ -1,5 +1,6 @@
-module.exports = {
+module.exports = {  
   archiveTemplate: (archiveData) => {
+    const currentYear = new Date().getFullYear()
     return {
       service: 'DocumentService',
       method: 'CreateDocument',
@@ -31,14 +32,15 @@ module.exports = {
         ResponsiblePersonRecno: '200065',
         ResponsibleEnterpriseRecno: '200065',
         Status: 'J',
-        Title: 'Formidlingsstatus 2023',
-        UnofficialTitle: 'Formidlingsstatus 2023'
+        Title: `Formidlingsstatus ${currentYear}`,
+        UnofficialTitle: `Formidlingsstatus ${currentYear} - ${archiveData.studentName}`
       }
     }
   },
   requiredFields: {
     caseNumber: '30/00000',
     ssn: '01010101010',
+    studentName: 'Frankenstein Hansen',
     documentDate: '2021-09-27',
     base64: 'heihei'
   }

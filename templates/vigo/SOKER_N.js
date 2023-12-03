@@ -32,13 +32,14 @@ module.exports = {
         ResponsibleEnterpriseRecno: '200065',
         Status: 'J',
         Title: 'Soker',
-        UnofficialTitle: 'Soker'
+        UnofficialTitle: `Soker - ${archiveData.studentName}`
       }
     }
   },
   requiredFields: {
     caseNumber: '30/00000',
     ssn: '01010101010',
+    studentName: 'Klaus Paus',
     documentDate: '2021-09-27',
     base64: 'heihei'
   }

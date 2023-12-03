@@ -23,7 +23,7 @@ module.exports = {
             Base64Data: archiveData.base64,
             Category: '1',
             Format: archiveData.fileExt,
-            VersionFormat: 'P',
+            VersionFormat: archiveData.fileExt.toLowerCase() === 'pdf' ? 'P' : null,
             Status: 'F',
             Title: 'Vedlegg til prøve'
           }

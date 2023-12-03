@@ -31,13 +31,14 @@ module.exports = {
         ResponsibleEnterpriseRecno: '200065',
         Status: 'J',
         Title: 'Oppmelding til fag- og svenneprøve',
-        UnofficialTitle: 'Oppmelding til fag- og svenneprøve'
+        UnofficialTitle: `Oppmelding til fag- og svenneprøve - ${archiveData.studentName}`
       }
     }
   },
   requiredFields: {
     caseNumber: '30/00000',
     ssn: '01010101010',
+    studentName: 'Halvorsen Tjalvorsen',
     documentDate: '2021-09-27',
     base64: 'heihei'
   }

@@ -31,13 +31,14 @@ module.exports = {
         ResponsibleEnterpriseRecno: '200065',
         Status: 'J',
         Title: 'Signert og godkjent lærekontrakt',
-        UnofficialTitle: 'Signert og godkjent lærekontrakt'
+        UnofficialTitle: `Signert og godkjent lærekontrakt - ${archiveData.studentName}`
       }
     }
   },
   requiredFields: {
     caseNumber: '30/00000',
     ssn: '01010101010',
+    studentName: 'Bjarne Betjent',
     documentDate: '2021-09-27',
     base64: 'heihei'
   }
