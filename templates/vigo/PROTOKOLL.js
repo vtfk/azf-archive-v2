@@ -28,7 +28,7 @@ module.exports = {
           }
         ],
         Paragraph: 'Offl. § 13 jf. fvl. § 13 (1) nr.1',
-        ResponsibleEnterpriseRecno: '200065',
+        ResponsibleEnterpriseRecno: '200065', // Seksjon for fag- og yrkesopplæring
         Status: 'J',
         Title: 'Protokoll',
         UnofficialTitle: `Protokoll - ${archiveData.studentName}`

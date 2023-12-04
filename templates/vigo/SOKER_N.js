@@ -28,8 +28,8 @@ module.exports = {
           }
         ],
         Paragraph: 'Offl. § 13 jf. fvl. § 13 (1) nr.1',
-        ResponsiblePersonRecno: '200326',
-        ResponsibleEnterpriseRecno: '200065',
+        ResponsiblePersonRecno: '200326', // VTFK robot
+        ResponsibleEnterpriseRecno: '200065', // Seksjon for fag- og yrkesopplæring
         Status: 'J',
         Title: 'Soker',
         UnofficialTitle: `Soker - ${archiveData.studentName}`

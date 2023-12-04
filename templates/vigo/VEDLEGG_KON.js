@@ -29,8 +29,8 @@ module.exports = {
           }
         ],
         Paragraph: 'Offl. § 13 jf. fvl. § 13 (1) nr.1',
-        ResponsiblePersonRecno: '200065',
-        ResponsibleEnterpriseRecno: '200065',
+        ResponsiblePersonRecno: '200065', // Seksjon for fag- og yrkesopplæring
+        ResponsibleEnterpriseRecno: '200065', // Seksjon for fag- og yrkesopplæring
         Status: 'J',
         Title: 'Vedlegg til lærekontrakt',
         UnofficialTitle: `Vedlegg til lærekontrakt - ${archiveData.studentName}`

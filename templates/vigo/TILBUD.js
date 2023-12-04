@@ -30,8 +30,8 @@ module.exports = {
           }
         ],
         Paragraph: 'Offl. § 13 jf. fvl. § 13 (1) nr.1',
-        ResponsiblePersonRecno: '200326',
-        ResponsibleEnterpriseRecno: '506',
+        ResponsiblePersonRecno: '200326', // VTFK Robot
+        ResponsibleEnterpriseRecno: '506', // Vestfold og Telemark fylkeskommune
         Status: 'J',
         Title: `Tilbud om skoleplass skoleåret ${currentYear}/${nextYear}`,
         UnofficialTitle: `Tilbud om skoleplass skoleåret ${currentYear}/${nextYear} - ${archiveData.studentName}`

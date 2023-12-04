@@ -30,7 +30,7 @@ module.exports = {
         Category: 'Dokument ut',
         Contacts: [
           {
-            ReferenceNumber: 'recno:200065',
+            ReferenceNumber: 'recno:200065', // Seksjon for fag- og yrkesopplæring
             Role: 'Avsender'
           },
           {
@@ -51,7 +51,7 @@ module.exports = {
           }
         ],
         Paragraph: 'Offl. § 13 jf. fvl. § 13 (1) nr.1',
-        ResponsibleEnterpriseRecno: '200065',
+        ResponsibleEnterpriseRecno: '200065', // Seksjon for fag- og yrkesopplæring
         Status: 'R',
         Title: 'Informasjonsbrev ved godkjent kontrakt',
         UnofficialTitle: `Informasjonsbrev ved godkjent kontrakt - ${archiveData.studentName}`,
