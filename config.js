@@ -1,4 +1,5 @@
 module.exports = {
+  NODE_ENV: process.env.NODE_ENV || 'dev',
   ARCHIVE_ROLE: process.env.ARCHIVE_ROLE || 'ein rolle som ikkje finnast',
   ARCHIVE: {
     url: process.env.ARCHIVE_URL || 'arkivarkivarkiv.vtfk.no',
