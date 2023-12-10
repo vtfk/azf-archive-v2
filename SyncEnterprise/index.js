@@ -47,7 +47,7 @@ module.exports = async (context, req) => {
 
   try {
     logger('info', [`Fetching brregdata for orgnr: ${orgnr}`], context)
-    const brregEnterprise = await getBrregData(orgnr)
+    const brregEnterprise = await getBrregData(orgnr, context)
     logger('info', [`Got brregdata for orgnr: ${orgnr}, repacking result`], context)
     const repackedEnterprise = repackBrreg(brregEnterprise)
     logger('info', [`Syncing enterprise orgnr: ${orgnr} in archive`], context)
