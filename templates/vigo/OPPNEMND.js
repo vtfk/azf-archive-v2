@@ -1,3 +1,5 @@
+const { NODE_ENV } = require('../../config')
+
 module.exports = {
   archiveTemplate: (archiveData) => {
     return {
@@ -7,7 +9,7 @@ module.exports = {
         AccessCode: '13',
         AccessCodeDescription: 'Offl §13 jf. fvl §13 første ledd pkt. 1 - taushetsplikt om personlige forhold',
         AccessGroup: 'Fagopplæring',
-        Archive: 'Saksdokument',
+        Archive: 'Elevdokument',
         CaseNumber: archiveData.caseNumber,
         Category: 'Internt notat / e-post UTEN oppfølging',
         DocumentDate: archiveData.documentDate,
@@ -21,8 +23,8 @@ module.exports = {
           }
         ],
         Paragraph: 'Offl. § 13 jf. fvl. § 13 (1) nr.1',
-        ResponsiblePersonRecno: '200065', // Seksjon for fag- og yrkesopplæring
-        ResponsibleEnterpriseRecno: '200065', // Seksjon for fag- og yrkesopplæring
+        ResponsiblePersonRecno: NODE_ENV === 'production' ? '200016' : '200019', // Seksjon Fag- og yrkesopplæring (vfk) Team fag-, yrkes- og voksenopplæring (tfk) (vfk-test: 200019, vfk-prod: 200016) (tfk-test: 200249, tfk-prod: 200472)
+        ResponsibleEnterpriseRecno: NODE_ENV === 'production' ? '200016' : '200019', // Seksjon Fag- og yrkesopplæring (vfk) Team fag-, yrkes- og voksenopplæring (tfk) (vfk-test: 200019, vfk-prod: 200016) (tfk-test: 200249, tfk-prod: 200472)
         Status: 'J',
         Title: 'Oppmelding sendt nemnd',
         UnofficialTitle: `Oppmelding sendt nemnd - ${archiveData.studentName}`

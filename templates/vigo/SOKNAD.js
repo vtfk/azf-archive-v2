@@ -1,3 +1,5 @@
+const { ARCHIVE_ROBOT } = require('../../config')
+
 module.exports = {
   archiveTemplate: (archiveData) => {
     const currentYear = new Date().getFullYear()
@@ -8,8 +10,8 @@ module.exports = {
       parameter: {
         AccessCode: '13',
         AccessCodeDescription: 'Offl §13 jf. fvl §13 første ledd pkt. 1 - taushetsplikt om personlige forhold',
-        AccessGroup: 'VTFK Robot',
-        Archive: 'Saksdokument',
+        AccessGroup: ARCHIVE_ROBOT.accessGroup,
+        Archive: 'Elevdokument',
         CaseNumber: archiveData.caseNumber,
         Category: 'Dokument inn',
         Contacts: [
@@ -30,8 +32,8 @@ module.exports = {
           }
         ],
         Paragraph: 'Offl. § 13 jf. fvl. § 13 (1) nr.1',
-        ResponsiblePersonRecno: '200326', // VTFK Robot
-        ResponsibleEnterpriseRecno: '506', // Vestfold og Telemark fylkeskommune
+        ResponsiblePersonRecno: ARCHIVE_ROBOT.recno, // Robot
+        ResponsibleEnterpriseNumber: '929882385', // fylkeskommune vfk (929882385) tfk (929882989)
         Status: 'J',
         Title: `Søknad til videregående opplæring - skoleåret ${currentYear}/${nextYear}`,
         UnofficialTitle: `Søknad til videregående opplæring - skoleåret ${currentYear}/${nextYear} - ${archiveData.studentName}`

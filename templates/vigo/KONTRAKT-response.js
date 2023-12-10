@@ -1,4 +1,5 @@
-const { GENERATED_PDF_PROPERTY_NAME } = require('../../config') // THIS LINE IS REQUIRED IF YOU NEED PDF GENERATION IN THE TEMPLATE
+const { GENERATED_PDF_PROPERTY_NAME, NODE_ENV } = require('../../config') // GENERATED_PDF_PROPERTY_NAME IS REQUIRED IF YOU NEED PDF GENERATION IN THE TEMPLATE
+
 module.exports = {
   pdfTemplate: (pdfData) => {
     // A pdfTemplate adds GENERATED_PDF_PROPERTY_NAME-property to archiveData, which can be used in the archiveTemplate
@@ -16,7 +17,7 @@ module.exports = {
         streetAddress: pdfData.streetAddress,
         zipCode: pdfData.zipCode,
         zipPlace: pdfData.zipPlace,
-        department: 'Seksjon for fag- og yrkesopplæring'
+        department: 'Seksjon Fag- og yrkesopplæring' // Telemark => Team fag-, yrkes- og voksenopplæring
       }
     }
   },
@@ -27,10 +28,11 @@ module.exports = {
       parameter: {
         AccessCode: '13',
         AccessGroup: 'Fagopplæring',
+        Archive: 'Elevdokument',
         Category: 'Dokument ut',
         Contacts: [
           {
-            ReferenceNumber: 'recno:200065', // Seksjon for fag- og yrkesopplæring
+            ReferenceNumber: NODE_ENV === 'production' ? 'recno:200016' : 'recno:200019', // Seksjon Fag- og yrkesopplæring (vfk) Team fag-, yrkes- og voksenopplæring (tfk) (vfk-test: 200019, vfk-prod: 200016) (tfk-test: 200249, tfk-prod: 200472)
             Role: 'Avsender'
           },
           {
@@ -51,11 +53,10 @@ module.exports = {
           }
         ],
         Paragraph: 'Offl. § 13 jf. fvl. § 13 (1) nr.1',
-        ResponsibleEnterpriseRecno: '200065', // Seksjon for fag- og yrkesopplæring
+        ResponsibleEnterpriseRecno: NODE_ENV === 'production' ? '200016' : '200019', // Seksjon Fag- og yrkesopplæring (vfk) Team fag-, yrkes- og voksenopplæring (tfk) (vfk-test: 200019, vfk-prod: 200016) (tfk-test: 200249, tfk-prod: 200472)
         Status: 'R',
         Title: 'Informasjonsbrev ved godkjent kontrakt',
         UnofficialTitle: `Informasjonsbrev ved godkjent kontrakt - ${archiveData.studentName}`,
-        Archive: 'Saksdokument',
         CaseNumber: archiveData.caseNumber
       }
     }
