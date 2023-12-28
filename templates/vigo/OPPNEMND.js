@@ -11,7 +11,7 @@ module.exports = {
         AccessGroup: 'Fagopplæring',
         Archive: 'Elevdokument',
         CaseNumber: archiveData.caseNumber,
-        Category: 'Internt notat / e-post UTEN oppfølging',
+        Category: 'Internt notat uten oppfølging',
         DocumentDate: archiveData.documentDate,
         Files: [
           {

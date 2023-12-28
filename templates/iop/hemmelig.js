@@ -32,7 +32,7 @@ module.exports = {
       parameter: {
         AccessCode: '13',
         AccessGroup: 'VTFK Robot',
-        Category: 'Internt notat / e-post MED oppfølging',
+        Category: 'Internt notat med oppfølging',
         Contacts: [
           {
             ReferenceNumber: archiveData.organizationNumber,

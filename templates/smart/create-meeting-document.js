@@ -8,7 +8,7 @@ module.exports = {
         AccessGroup: archiveData.accessGroup,
         Archive: 'Saksdokument',
         CaseNumber: archiveData.caseNumber,
-        Category: 'Internt notat / e-post UTEN oppfølging',
+        Category: 'Internt notat uten oppfølging',
         DocumentDate: archiveData.meetingDate,
         Files: [
           {

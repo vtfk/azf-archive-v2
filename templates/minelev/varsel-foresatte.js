@@ -6,7 +6,7 @@ module.exports = {
       parameter: {
         AccessCode: '13',
         AccessGroup: archiveData.accessGroup,
-        Category: 'Internt notat / e-post MED oppfølging',
+        Category: 'Internt notat med oppfølging',
         Contacts: [
           {
             ReferenceNumber: archiveData.organizationNumber,
