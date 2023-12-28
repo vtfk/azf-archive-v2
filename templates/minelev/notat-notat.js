@@ -24,7 +24,7 @@ module.exports = {
         Status: 'J',
         Title: archiveData.title,
         UnofficialTitle: archiveData.unofficialTitle,
-        Archive: 'Senstitivt elevdokument',
+        Archive: 'Sensitivt elevdokument',
         CaseNumber: archiveData.caseNumber
       }
     }
