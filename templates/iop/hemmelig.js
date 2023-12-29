@@ -57,7 +57,7 @@ module.exports = {
         Paragraph: 'Offl. § 13 jf. fvl. § 13 (1) nr.1',
         ResponsibleEnterpriseNumber: archiveData.organizationNumber,
         Status: 'J',
-        Title: 'Individuell opplæringsplan archiveData.documentNumber, må skrives ut og leveres til elev',
+        Title: `Individuell opplæringsplan ${archiveData.documentNumber}, må skrives ut og leveres til elev`,
         UnofficialTitle: `Individuell opplæringsplan ${archiveData.documentNumber}, må skrives ut og leveres til elev - ${archiveData.student.name}`,
         Archive: 'Elevdokument',
         CaseNumber: archiveData.caseNumber
