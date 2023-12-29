@@ -37,7 +37,7 @@ module.exports = {
         ResponsibleEnterpriseNumber: archiveData.organizationNumber,
         Status: 'R',
         Title: `${archiveData.titleType} - Individuell opplæringsplan`,
-        UnofficialTitle: `${archiveData.titleType} - Individuell opplæringsplan - archiveData.displayName - versjon archiveData.versionNumber`
+        UnofficialTitle: `${archiveData.titleType} - Individuell opplæringsplan - ${archiveData.displayName} - versjon ${archiveData.versionNumber}`
       }
     }
   },
