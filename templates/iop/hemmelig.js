@@ -31,7 +31,7 @@ module.exports = {
       method: 'CreateDocument',
       parameter: {
         AccessCode: '13',
-        AccessGroup: 'VTFK Robot',
+        AccessGroup: archiveData.accessGroup,
         Category: 'Internt notat med oppfølging',
         Contacts: [
           {
@@ -65,6 +65,7 @@ module.exports = {
     }
   },
   requiredFields: {
+    accessGroup: 'Elev belev vgs',
     organizationNumber: '00000',
     documentDate: '2021-09-27',
     documentNumber: '30/00000-12',
