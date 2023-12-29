@@ -59,7 +59,7 @@ module.exports = {
         Status: 'J',
         Title: 'Individuell opplæringsplan archiveData.documentNumber, må skrives ut og leveres til elev',
         UnofficialTitle: `Individuell opplæringsplan ${archiveData.documentNumber}, må skrives ut og leveres til elev - ${archiveData.student.name}`,
-        Archive: 'Saksdokument',
+        Archive: 'Elevdokument',
         CaseNumber: archiveData.caseNumber
       }
     }

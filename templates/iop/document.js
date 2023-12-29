@@ -7,7 +7,7 @@ module.exports = {
         AccessCode: '13',
         AccessCodeDescription: 'Offl §13 jf. fvl §13 første ledd pkt. 1 - taushetsplikt om personlige forhold',
         AccessGroup: archiveData.accessGroup,
-        Archive: 'Saksdokument',
+        Archive: 'Elevdokument',
         CaseNumber: archiveData.caseNumber,
         Category: 'Dokument ut',
         Contacts: [
