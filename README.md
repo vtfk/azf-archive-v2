@@ -414,6 +414,63 @@ Either updates the **PrivatePerson** with FREG data if person exists on identifi
 }
 ```
 
+### ```POST /SyncEmployee```
+- Creates **PrivatePerson** on person if one doesn't exist on given identifier, updates the existing PrivatePerson if "forceUpdate" is true.
+- Fetches **responsibleEnterprise** and **archiveManager** for the privateperson/employee. If enterprise from HR is not found in archive - moves one level up and tries to find that instead. 
+
+Fetches person info from [FINTFOLK-API](https://github.com/vtfk/azf-fintfolk-api)
+
+#### `With ssn as parameter`
+```json
+{
+  "ssn": "01010101010"
+}
+```
+
+#### `With ansattnummer as parameter`
+```json
+{
+  "ssn": "01010101010"
+}
+```
+
+#### `With upn as parameter` **NOTE: should not be used until all employees are in the same tenant**
+```json
+{
+  "upn": "user.name@domain.com"
+}
+```
+
+#### Returns
+```json
+{
+	"privatePerson": {
+		"ssn": "12345678910",
+		"name": "Shrek Sump",
+		"firstName": "Shrek",
+		"lastName": "Sump",
+		"streetAddress": "Sumpen 1",
+		"zipCode": "1234",
+		"zipPlace": "Drømmeland",
+		"addressProtection": false,
+		"recno": 200451,
+		"updated": false,
+		"created": false
+	},
+	"archiveManager": {
+		"recno": 200931,
+		"email": "grev.farquaad@shrektek.no",
+		"name": "Grev Farquaad"
+	},
+	"responsibleEnterprise": {
+		"recno": 200103,
+		"externalId": "3201",
+		"shortName": "SHREK-TEK",
+		"name": "Team Shrek-tek"
+	}
+}
+```
+
 ### ```POST /SyncSharePointSite```
 Endpoint for connecting a Sharepoint site to a archive-project, and a list || documentLibrary || folder to a archive-case
 
@@ -484,6 +541,8 @@ All templates are found in [the templates folder](./templates/)
       "APPREG_CLIENT_SECRET": "client secret",
       "APPREG_TENANT_ID": "tenant id",
       "GRAPH_SCOPE": "https://graph.microsoft.com/.default",
+      "FINTFOLK_URL": "fdfjkdlfd.no",
+      "FINTFOLK_SCOPE": "fjdifjdif",
       "FREG_URL": "url to freg api",
       "FREG_SCOPE": "scope for freg api",
       "BRREG_URL": "url to brreg api",
