@@ -47,7 +47,12 @@ module.exports = {
     url: process.env.FREG_URL || 'freg.freg.vtfk.no',
     scope: process.env.FREG_SCOPE || 'fregscupet'
   },
+  FINTFOLK: {
+    url: process.env.FINTFOLK_URL || 'fint.finttin.vtfk.no',
+    scope: process.env.FINTFOLK_SCOPE || 'fregscupet'
+  },
   ACCESSGROUP_EXCEPTIONS: (process.env.ACCESSGROUP_EXCEPTIONS && JSON.parse(process.env.ACCESSGROUP_EXCEPTIONS)) || {},
   GENERATED_PDF_PROPERTY_NAME: process.env.GENERATED_PDF_PROPERTY_NAME || 'templatePdfBase64',
-  COUNTY_NUMBER: process.env.COUNTY_NUMBER || '38'
+  COUNTY_NUMBER: process.env.COUNTY_NUMBER || '38',
+  DEV_SYNCEMPLOYEE_MANAGER: process.env.DEV_SYNCEMPLOYEE_MANAGER || false
 }
