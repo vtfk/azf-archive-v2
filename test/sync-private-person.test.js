@@ -1,4 +1,4 @@
-const { repackFregAddress } = require('../lib/archive/sync-private-person')
+const { repackFregAddress, repackBirthdate } = require('../lib/archive/sync-private-person')
 
 const fregNoWorries = {
   adressebeskyttelse: [], // Returns array - check if it includes "fortrolig" or "strengtFortrolig"
@@ -80,5 +80,18 @@ describe('Repack freg address works as expected when', () => {
     const { address, addressProtection } = repackFregAddress(fregAddressProtectionAndBlock)
     expect(address.streetAddress).toBe('Sperret adresse (fortrolig)')
     expect(addressProtection).toBe(true)
+  })
+})
+
+describe('repackBirthdate works as expected when', () => {
+  test('birthdate is 2021-03-18', () => {
+    const repackedBirthdate = repackBirthdate('2021-03-18')
+    expect(repackedBirthdate.regular).toBe('180321')
+    expect(repackedBirthdate.fakeSsn).toBe('580321')
+  })
+  test('birthdate is 1987-11-02', () => {
+    const repackedBirthdate = repackBirthdate('1987-11-02')
+    expect(repackedBirthdate.regular).toBe('021187')
+    expect(repackedBirthdate.fakeSsn).toBe('421187')
   })
 })
